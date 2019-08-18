@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.code.squad.product.manager;
+package com.code.squad.product.manager.model;
 
 /**
  *
  * @author gabriel
  */
-public class Main {
-    //Aqui é o main, favor não codar aqui e apenas fazer chamada de outros arquivos
-    public static void main(String[] args) {
-        
-    }
+public class Product {
+    
 }
