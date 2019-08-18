@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.codesquad</groupId>
+    <artifactId>product-manager</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <developers>
+        <developer>
+            <id>gabriel-holanda</id>
+            <name>Gabriel Holanda dos Santos</name>
+        </developer>
+         <developer>
+            <id>patrick-chagas</id>
+            <name>Patrick Chagas Tavares</name>
+        </developer>
+         <developer>
+            <id>marcelo-moraes</id>
+            <name>Marcelo Moraes</name>
+        </developer>
+         <developer>
+            <id>lucas-matheus</id>
+            <name>Lucas Matheus Nascimento</name>
+        </developer>
+         <developer>
+            <id>henrique-cyrillo</id>
+            <name>Henrique Cyrillo</name>
+        </developer>
+    </developers>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+</project>
