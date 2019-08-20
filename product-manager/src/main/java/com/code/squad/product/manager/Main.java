@@ -5,6 +5,7 @@
  */
 package com.code.squad.product.manager;
 
+import com.code.squad.product.manager.view.Menu;
 /**
  *
  * @author gabriel
@@ -12,6 +13,8 @@ package com.code.squad.product.manager;
 public class Main {
     //Aqui é o main, favor não codar aqui e apenas fazer chamada de outros arquivos
     public static void main(String[] args) {
-        
+      
+      
+     
     }
 }
