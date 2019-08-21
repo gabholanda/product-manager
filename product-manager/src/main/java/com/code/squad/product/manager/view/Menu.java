@@ -44,9 +44,8 @@ public class Menu extends javax.swing.JFrame {
 
         ProductAdd.setBackground(new java.awt.Color(255, 255, 255));
         ProductAdd.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
-        ProductAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.code.squad.product.manager.img/testeimg/teste.jpg"))); // NOI18N
         ProductAdd.setText("ADICIONAR");
-        ProductAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ProductAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         ProductAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ProductAddActionPerformed(evt);
@@ -55,9 +54,8 @@ public class Menu extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI Light", 1, 10)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.code.squad.product.manager.img/testeimg/exit.jpg"))); // NOI18N
         jButton1.setText("SAIR");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout ProductPainelLayout = new javax.swing.GroupLayout(ProductPainel);
         ProductPainel.setLayout(ProductPainelLayout);
@@ -70,7 +68,7 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(ProductPainelLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(ProductAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(41, 41, 41))
         );
