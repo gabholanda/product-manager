@@ -56,6 +56,11 @@ public class Menu extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Segoe UI Light", 1, 10)); // NOI18N
         jButton1.setText("SAIR");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ProductPainelLayout = new javax.swing.GroupLayout(ProductPainel);
         ProductPainel.setLayout(ProductPainelLayout);
@@ -104,6 +109,10 @@ public class Menu extends javax.swing.JFrame {
         frameproduct.setVisible(true);
         dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_ProductAddActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.exit(0);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
