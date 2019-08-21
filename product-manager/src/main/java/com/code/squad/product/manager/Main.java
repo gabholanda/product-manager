@@ -14,7 +14,8 @@ public class Main {
     //Aqui é o main, favor não codar aqui e apenas fazer chamada de outros arquivos
     public static void main(String[] args) {
       
-      
+      Menu menu = new Menu();
+      menu.setVisible(true);
      
     }
 }

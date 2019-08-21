@@ -178,39 +178,33 @@ public class CadastrarProdutos extends javax.swing.JFrame {
 
         Incluir.setBackground(new java.awt.Color(255, 255, 255));
         Incluir.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
-        Incluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.code.squad.product.manager.img/testeimg/incluir.jpg"))); // NOI18N
         Incluir.setText("INCLUIR");
-        Incluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Incluir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         Atualizar.setBackground(new java.awt.Color(255, 255, 255));
         Atualizar.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
-        Atualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.code.squad.product.manager.img/testeimg/atualizar.jpg"))); // NOI18N
         Atualizar.setText("ATUALIZAR");
-        Atualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Atualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         Listar.setBackground(new java.awt.Color(255, 255, 255));
         Listar.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
-        Listar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.code.squad.product.manager.img/testeimg/listar.jpg"))); // NOI18N
         Listar.setText("LISTAR");
-        Listar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Listar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         Excluir.setBackground(new java.awt.Color(255, 255, 255));
         Excluir.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
-        Excluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.code.squad.product.manager.img/testeimg/excluir.jpg"))); // NOI18N
         Excluir.setText("EXCLUIR");
-        Excluir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Excluir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.code.squad.product.manager.img/testeimg/save.jpg.png"))); // NOI18N
         jButton2.setText("SALVAR");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com.code.squad.product.manager.img/testeimg/cancel.jpg"))); // NOI18N
         jButton1.setText("CANCELAR");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
