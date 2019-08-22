@@ -5,6 +5,10 @@
  */
 package com.code.squad.product.manager.view;
 
+import javax.swing.JOptionPane;
+import com.code.squad.product.manager.controller.ProductController;
+import java.util.ArrayList;
+
 /**
  *
  * @author marcelo.moraes
@@ -17,7 +21,83 @@ public class CadastrarProdutos extends javax.swing.JFrame {
     public CadastrarProdutos() {
         initComponents();
         setLocationRelativeTo(null);
+        desabilitadorDosCampos();
         dispose();
+    }
+
+    //função para habilitar o cadastro de produtos
+    public void habilitadorDosCampos() {
+        IDTexto.setEditable(false);
+        DataTexto.setEditable(false);
+        NomeTexto.setEditable(true);
+        DescricaoTexto.setEditable(true);
+        QuantidadeTexto.setEditable(true);
+        PrecoCompraTexto.setEditable(true);
+        PrecoVendaTexto.setEditable(true);
+
+        salvar.setEnabled(true);
+        cancelar.setEnabled(true);
+        Atualizar.setEnabled(false);
+        Listar.setEnabled(false);
+        Excluir.setEnabled(false);
+
+    }
+
+    //função para iniciar desabilitada o preenchimento do formulário 
+    public void desabilitadorDosCampos() {
+        IDTexto.setEditable(false);
+        DataTexto.setEditable(false);
+        NomeTexto.setEditable(false);
+        DescricaoTexto.setEditable(false);
+        QuantidadeTexto.setEditable(false);
+        PrecoCompraTexto.setEditable(false);
+        PrecoVendaTexto.setEditable(false);
+
+        salvar.setEnabled(false);
+        cancelar.setEnabled(false);
+        Voltar.setEnabled(true);
+    }
+
+    //limpa os campos preenchidos para realizar um novo cadastro de produto 
+    public void limparCamposDados() {
+        IDTexto.setText("");
+        DataTexto.setText("");
+        NomeTexto.setText("");
+        DescricaoTexto.setText("");
+        QuantidadeTexto.setText("");
+        PrecoCompraTexto.setText("");
+        PrecoVendaTexto.setText("");
+
+    }
+
+    //validação se os campos foram preenchidos ou não
+    private boolean validadorDeCampos() {
+
+        if (this.NomeTexto.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Cadastre o nome do produto!");
+            return false;
+        }
+
+        if (this.DescricaoTexto.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Cadastre uma descrição para o produto!");
+            return false;
+        }
+
+        if (this.QuantidadeTexto.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Cadastre a quantidade do produto!");
+            return false;
+        }
+
+        if (this.PrecoCompraTexto.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Cadastre o preço que o produto foi comprado!");
+            return false;
+        }
+
+        if (this.PrecoVendaTexto.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Cadastre o preço que o produto será vendido!");
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -53,8 +133,8 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         Atualizar = new javax.swing.JButton();
         Listar = new javax.swing.JButton();
         Excluir = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        salvar = new javax.swing.JButton();
+        cancelar = new javax.swing.JButton();
         TabelaDeDados = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         Voltar = new javax.swing.JButton();
@@ -180,6 +260,11 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         Incluir.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
         Incluir.setText("INCLUIR");
         Incluir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Incluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IncluirActionPerformed(evt);
+            }
+        });
 
         Atualizar.setBackground(new java.awt.Color(255, 255, 255));
         Atualizar.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
@@ -196,15 +281,20 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         Excluir.setText("EXCLUIR");
         Excluir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
-        jButton2.setText("SALVAR");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        salvar.setBackground(new java.awt.Color(255, 255, 255));
+        salvar.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
+        salvar.setText("SALVAR");
+        salvar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        salvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salvarActionPerformed(evt);
+            }
+        });
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
-        jButton1.setText("CANCELAR");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        cancelar.setBackground(new java.awt.Color(255, 255, 255));
+        cancelar.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
+        cancelar.setText("CANCELAR");
+        cancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -247,9 +337,9 @@ public class CadastrarProdutos extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Excluir)
                                 .addGap(5, 5, 5)
-                                .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(salvar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(ProductPainelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(TabelaDeDados)))
@@ -266,12 +356,12 @@ public class CadastrarProdutos extends javax.swing.JFrame {
                 .addComponent(PainelCentral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(ProductPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Atualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Atualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
                     .addComponent(Incluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Listar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Excluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(salvar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(TabelaDeDados, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -298,6 +388,16 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         menu.setVisible(true);
         dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_VoltarActionPerformed
+
+    private void IncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IncluirActionPerformed
+        habilitadorDosCampos();        // TODO add your handling code here:
+    }//GEN-LAST:event_IncluirActionPerformed
+
+    private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
+        if (validadorDeCampos()) {
+
+        }
+    }//GEN-LAST:event_salvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -361,8 +461,8 @@ public class CadastrarProdutos extends javax.swing.JFrame {
     private javax.swing.JScrollPane TabelaDeDados;
     private javax.swing.JLabel Titulo;
     private javax.swing.JButton Voltar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton cancelar;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton salvar;
     // End of variables declaration//GEN-END:variables
 }
