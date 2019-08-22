@@ -34,13 +34,13 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         QuantidadeTexto.setEditable(true);
         PrecoCompraTexto.setEditable(true);
         PrecoVendaTexto.setEditable(true);
-        
+
         salvar.setEnabled(true);
         cancelar.setEnabled(true);
         Atualizar.setEnabled(false);
         Listar.setEnabled(false);
         Excluir.setEnabled(false);
-        novo.setEnabled(false);
+
     }
 
     //função para iniciar desabilitada o preenchimento do formulário 
@@ -52,7 +52,7 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         QuantidadeTexto.setEditable(false);
         PrecoCompraTexto.setEditable(false);
         PrecoVendaTexto.setEditable(false);
-        
+
         salvar.setEnabled(false);
         cancelar.setEnabled(false);
         Voltar.setEnabled(true);
@@ -67,32 +67,32 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         QuantidadeTexto.setText("");
         PrecoCompraTexto.setText("");
         PrecoVendaTexto.setText("");
-        
+
     }
 
     //validação se os campos foram preenchidos ou não
     private boolean validadorDeCampos() {
-        
+
         if (this.NomeTexto.getText().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(this, "Cadastre o nome do produto!");
             return false;
         }
-        
+
         if (this.DescricaoTexto.getText().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(this, "Cadastre uma descrição para o produto!");
             return false;
         }
-        
+
         if (this.QuantidadeTexto.getText().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(this, "Cadastre a quantidade do produto!");
             return false;
         }
-        
+
         if (this.PrecoCompraTexto.getText().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(this, "Cadastre o preço que o produto foi comprado!");
             return false;
         }
-        
+
         if (this.PrecoVendaTexto.getText().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(this, "Cadastre o preço que o produto será vendido!");
             return false;
@@ -138,7 +138,6 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         TabelaDeDados = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         Voltar = new javax.swing.JButton();
-        novo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -314,11 +313,6 @@ public class CadastrarProdutos extends javax.swing.JFrame {
             }
         });
 
-        novo.setBackground(new java.awt.Color(255, 255, 255));
-        novo.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
-        novo.setText("NOVO");
-        novo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
         javax.swing.GroupLayout ProductPainelLayout = new javax.swing.GroupLayout(ProductPainel);
         ProductPainel.setLayout(ProductPainelLayout);
         ProductPainelLayout.setHorizontalGroup(
@@ -344,9 +338,7 @@ public class CadastrarProdutos extends javax.swing.JFrame {
                                 .addComponent(Excluir)
                                 .addGap(5, 5, 5)
                                 .addComponent(salvar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(novo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(ProductPainelLayout.createSequentialGroup()
                         .addContainerGap()
@@ -368,9 +360,7 @@ public class CadastrarProdutos extends javax.swing.JFrame {
                     .addComponent(Incluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Listar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Excluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ProductPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(salvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(novo))
+                    .addComponent(salvar, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(TabelaDeDados, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -405,7 +395,7 @@ public class CadastrarProdutos extends javax.swing.JFrame {
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
         if (validadorDeCampos()) {
-            
+
         }
     }//GEN-LAST:event_salvarActionPerformed
 
@@ -473,7 +463,6 @@ public class CadastrarProdutos extends javax.swing.JFrame {
     private javax.swing.JButton Voltar;
     private javax.swing.JButton cancelar;
     private javax.swing.JTable jTable1;
-    private javax.swing.JButton novo;
     private javax.swing.JButton salvar;
     // End of variables declaration//GEN-END:variables
 }

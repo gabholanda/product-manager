@@ -74,9 +74,7 @@
                                   <Component id="Excluir" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                                   <Component id="salvar" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="novo" max="32767" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Component id="cancelar" min="-2" pref="197" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -106,10 +104,7 @@
                       <Component id="Incluir" max="32767" attributes="0"/>
                       <Component id="Listar" max="32767" attributes="0"/>
                       <Component id="Excluir" max="32767" attributes="0"/>
-                      <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                          <Component id="salvar" alignment="3" max="32767" attributes="0"/>
-                          <Component id="novo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="salvar" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="cancelar" alignment="1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -451,20 +446,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="VoltarActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="novo">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI Light" size="11" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="NOVO"/>
-            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Cursor em Forma de M&#xe3;o"/>
-            </Property>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>
