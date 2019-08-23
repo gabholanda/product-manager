@@ -26,8 +26,8 @@ public class ProductController {
         return ProductDAO.atualizar(p);
     }
     
-    public static boolean excluir(int pIdProduto) {
-        return ProductDAO.excluir(pIdProduto);
+    public static boolean excluir(int id) {
+        return ProductDAO.excluir(id);
     }
 
     public static ArrayList<String[]> getProdutos() throws SQLException {
