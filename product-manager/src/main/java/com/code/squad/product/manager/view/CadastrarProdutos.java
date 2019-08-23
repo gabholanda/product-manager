@@ -7,7 +7,11 @@ package com.code.squad.product.manager.view;
 
 import javax.swing.JOptionPane;
 import com.code.squad.product.manager.controller.ProductController;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,6 +22,8 @@ public class CadastrarProdutos extends javax.swing.JFrame {
     /**
      * Creates new form CadastrarProdutos
      */
+    private String modoTela;
+
     public CadastrarProdutos() {
         initComponents();
         setLocationRelativeTo(null);
@@ -100,6 +106,30 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         return true;
     }
 
+    public void LoadTable() throws SQLException {
+
+        //Peço ao controller resgatar os produtos  do banco de dados
+        ArrayList<String[]> linhasProdutos = ProductController.getProdutos();
+
+        DefaultTableModel tmProdutos = (DefaultTableModel) this.tblProduto.getModel();
+        //Limpo a tabela, excluindo todas as linhas
+        tmProdutos.setRowCount(0);
+
+        //Para cada produto resgatado do banco de dados, atualizo a tabela
+        linhasProdutos.forEach((c) -> {
+            tmProdutos.addRow(c);
+        });
+
+        //Defino o tamanho para cada coluna
+        tblProduto.getColumnModel().getColumn(0).setPreferredWidth(300); //Codigo do item
+        tblProduto.getColumnModel().getColumn(1).setPreferredWidth(250); // Data
+        tblProduto.getColumnModel().getColumn(2).setPreferredWidth(200); // Nome
+        tblProduto.getColumnModel().getColumn(3).setPreferredWidth(300); // Descricao
+        tblProduto.getColumnModel().getColumn(3).setPreferredWidth(300); // Quantidade
+        tblProduto.getColumnModel().getColumn(3).setPreferredWidth(300); // PrecoCompra
+        tblProduto.getColumnModel().getColumn(3).setPreferredWidth(300); // PrecoVenda
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -136,7 +166,7 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         salvar = new javax.swing.JButton();
         cancelar = new javax.swing.JButton();
         TabelaDeDados = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblProduto = new javax.swing.JTable();
         Voltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -272,6 +302,11 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         Atualizar.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
         Atualizar.setText("ATUALIZAR");
         Atualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Atualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AtualizarActionPerformed(evt);
+            }
+        });
 
         Listar.setBackground(new java.awt.Color(255, 255, 255));
         Listar.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
@@ -282,6 +317,11 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         Excluir.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
         Excluir.setText("EXCLUIR");
         Excluir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Excluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExcluirActionPerformed(evt);
+            }
+        });
 
         salvar.setBackground(new java.awt.Color(255, 255, 255));
         salvar.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
@@ -303,7 +343,7 @@ public class CadastrarProdutos extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -311,7 +351,7 @@ public class CadastrarProdutos extends javax.swing.JFrame {
 
             }
         ));
-        TabelaDeDados.setViewportView(jTable1);
+        TabelaDeDados.setViewportView(tblProduto);
 
         Voltar.setText("VOLTAR");
         Voltar.addActionListener(new java.awt.event.ActionListener() {
@@ -408,42 +448,59 @@ public class CadastrarProdutos extends javax.swing.JFrame {
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
         desabilitadorDosCampos();
+        limparCamposDados();
     }//GEN-LAST:event_cancelarActionPerformed
+
+    private void AtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AtualizarActionPerformed
+        //Verifico se há linhas para poder editar
+        if (tblProduto.getRowCount() > 0) {
+            //Verifico se o usuário selecionou alguma linha (Primeira linha = 0)
+            if (tblProduto.getSelectedRow() >= 0) {
+
+                habilitadorDosCampos();
+
+                //Variável acessória para identifcar se o formulário está em modo de edição ou alteração
+                modoTela = "Editar";
+                //Atribuo os valores que estão na linha selecionada para a tabela
+                NomeTexto.setText(tblProduto.getModel().getValueAt(tblProduto.getSelectedRow(), 1).toString());
+                DescricaoTexto.setText(tblProduto.getModel().getValueAt(tblProduto.getSelectedRow(), 2).toString());
+                QuantidadeTexto.setText(tblProduto.getModel().getValueAt(tblProduto.getSelectedRow(), 3).toString());
+                PrecoCompraTexto.setText(tblProduto.getModel().getValueAt(tblProduto.getSelectedRow(), 4).toString());
+                PrecoVendaTexto.setText(tblProduto.getModel().getValueAt(tblProduto.getSelectedRow(), 5).toString());
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Selecione um produto para editar!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Não há produtos para editar!");
+        }
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_AtualizarActionPerformed
+
+    private void ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirActionPerformed
+        if (tblProduto.getRowCount() > 0) {
+            int numeroLinha = tblProduto.getSelectedRow();
+            if (ProductController.excluir(Integer.parseInt(tblProduto.getValueAt(numeroLinha, 0).toString()))) {
+                try {
+                    this.LoadTable();
+                } catch (SQLException ex) {
+                    Logger.getLogger(CadastrarProdutos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                JOptionPane.showMessageDialog(this, "Produto excluído da base de dados");
+            } else {
+                JOptionPane.showMessageDialog(this, "Falha ao excluir o produto!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Não há produtos para excluir!");
+        }
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_ExcluirActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastrarProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastrarProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastrarProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastrarProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CadastrarProdutos().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Atualizar;
@@ -473,7 +530,7 @@ public class CadastrarProdutos extends javax.swing.JFrame {
     private javax.swing.JLabel Titulo;
     private javax.swing.JButton Voltar;
     private javax.swing.JButton cancelar;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton salvar;
+    private javax.swing.JTable tblProduto;
     // End of variables declaration//GEN-END:variables
 }
