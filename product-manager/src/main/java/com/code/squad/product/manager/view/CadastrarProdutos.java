@@ -7,7 +7,11 @@ package com.code.squad.product.manager.view;
 
 import javax.swing.JOptionPane;
 import com.code.squad.product.manager.controller.ProductController;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -99,7 +103,25 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         }
         return true;
     }
+    
+    public void LoadTable() throws SQLException {
 
+            //Peço ao controller resgatar os produto do banco de dados
+            ArrayList<String[]> linhasproduct = ProductController.getProdutos();
+            
+         DefaultTableModel tmProduct = (DefaultTableModel) this.jTable1.getModel();
+        //Limpo a tabela, excluindo todas as linhas
+        tmProduct.setRowCount(0);
+
+        //Para cada produto resgatado do banco de dados, atualizo a tabela
+        linhasproduct.forEach((c) -> {
+            tmProduct.addRow(c);
+        });
+         //Defino o tamanho para cada coluna
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(40);
+
+    } 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -277,6 +299,11 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         Listar.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
         Listar.setText("LISTAR");
         Listar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Listar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListarActionPerformed(evt);
+            }
+        });
 
         Excluir.setBackground(new java.awt.Color(255, 255, 255));
         Excluir.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
@@ -409,6 +436,11 @@ public class CadastrarProdutos extends javax.swing.JFrame {
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
         desabilitadorDosCampos();
     }//GEN-LAST:event_cancelarActionPerformed
+
+    private void ListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarActionPerformed
+        salvar.setText("Consultar");
+        habilitadorDosCampos();
+    }//GEN-LAST:event_ListarActionPerformed
 
     /**
      * @param args the command line arguments
