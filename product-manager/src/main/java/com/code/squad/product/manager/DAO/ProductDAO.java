@@ -23,9 +23,9 @@ public class ProductDAO {
     //parametros para conexão com o bd
     //"com.mysql.cj.jdbc.Driver"
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver"; //Driver do MySQL - Se mudar o SGBD mude o Driver
-    private static final String LOGIN = "patrick"; //nome de um usuário do banco de dados
-    private static final String SENHA = "Patrick)4";//sua senha de acesso, bd do senac tem essa senha
-    private static final String URL = "jdbc:mysql://192.168.1.222:3306/produtobd?useTimezone=true&serverTimezone=UTC"; //URL do banco de dados
+    private static final String LOGIN = "root"; //nome de um usuário do banco de dados
+    private static final String SENHA = "adminadmin";//sua senha de acesso, bd do senac tem essa senha
+    private static final String URL = "jdbc:mysql://localhost:3306/produtobd?useTimezone=true&serverTimezone=UTC"; //URL do banco de dados
     private static Connection ConexaoProduto;
 
     //funcao para salvar dados no bd 
