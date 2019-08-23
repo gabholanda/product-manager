@@ -212,6 +212,7 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         Habilitado.setBackground(new java.awt.Color(255, 255, 255));
         ESCOLHAS.add(Habilitado);
         Habilitado.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
+        Habilitado.setSelected(true);
         Habilitado.setText("HABILITADO");
 
         Desabilitado.setBackground(new java.awt.Color(255, 255, 255));
@@ -312,6 +313,11 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         Listar.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
         Listar.setText("LISTAR");
         Listar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Listar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListarActionPerformed(evt);
+            }
+        });
 
         Excluir.setBackground(new java.awt.Color(255, 255, 255));
         Excluir.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
@@ -441,16 +447,36 @@ public class CadastrarProdutos extends javax.swing.JFrame {
     }//GEN-LAST:event_IncluirActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
+        ProductController Product = new ProductController();
         if (validadorDeCampos()) {
+
+            boolean valid, status = true;
+
+            if (Desabilitado.isSelected()) {
+                status = false;
+            }
+
+            valid = Product.salvar(NomeTexto.getText(), DescricaoTexto.getText(), Double.parseDouble(PrecoCompraTexto.getText().replace(",", ".")), Double.parseDouble(PrecoVendaTexto.getText().replace(",", ".")), Integer.parseInt(QuantidadeTexto.getText()), status);
+
+            if (valid) {
+                JOptionPane.showMessageDialog(null, "Produto salvo com sucesso!");
+                limparCamposDados();
+            } else {
+                JOptionPane.showMessageDialog(null, "Falha ao salvar os dados!");
+            }
 
         }
     }//GEN-LAST:event_salvarActionPerformed
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
+        limparCamposDados();
         desabilitadorDosCampos();
         limparCamposDados();
     }//GEN-LAST:event_cancelarActionPerformed
-
+0
+    private void ListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ListarActionPerformed
     private void AtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AtualizarActionPerformed
         //Verifico se há linhas para poder editar
         if (tblProduto.getRowCount() > 0) {
