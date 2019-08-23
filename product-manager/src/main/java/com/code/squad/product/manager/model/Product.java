@@ -31,6 +31,17 @@ public class Product {
         this.status = status;
     }
 
+    public Product(String nome, String descricao, double precoCompra, double precoVenda, int quantidade, boolean status) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.precoCompra = precoCompra;
+        this.precoVenda = precoVenda;
+        this.quantidade = quantidade;
+        this.status = status;
+    }
+
+    
+    
     public String getNome() {
         return nome;
     }

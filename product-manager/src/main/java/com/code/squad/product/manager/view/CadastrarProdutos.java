@@ -393,11 +393,11 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         Menu menu = new Menu();
         menu.setLocationRelativeTo(null);
         menu.setVisible(true);
-        dispose();        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_VoltarActionPerformed
 
     private void IncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IncluirActionPerformed
-        habilitadorDosCampos();        // TODO add your handling code here:
+        habilitadorDosCampos();
     }//GEN-LAST:event_IncluirActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed

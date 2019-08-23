@@ -5,6 +5,8 @@
  */
 package com.code.squad.product.manager.controller;
 
+import com.code.squad.product.manager.DAO.ProductDAO;
+import com.code.squad.product.manager.model.Product;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -13,27 +15,38 @@ import java.util.ArrayList;
  * @author marcelo.moraes
  */
 public class ProductController {
-    
-        public static boolean excluir(int pIdProduto)
-    {
-        return Product.excluir(pIdProduto);
+
+    public static boolean salvar(String nome, String descricao, double precoCompra, double precoVenda, int quantidade, boolean status) {
+        Product p = new Product(nome, descricao, precoCompra, precoVenda, quantidade, status);
+        return ProductDAO.salvarDados(p);
     }
-    public static ArrayList<String[]> getProduto() throws SQLException
-    {
-        ArrayList<Produto> produtos = ProdutoDAO.getProdutos();
+    
+    public static boolean atualizar(String nome, String descricao, double precoCompra, double precoVenda, int quantidade, boolean status) {
+        Product p = new Product(nome, descricao, precoCompra, precoVenda, quantidade, status);
+        return ProductDAO.atualizar(p);
+    }
+    
+    public static boolean excluir(int pIdProduto) {
+        return ProductDAO.excluir(pIdProduto);
+    }
+
+    public static ArrayList<String[]> getProdutos() throws SQLException {
+        ArrayList<Product> produtos = ProductDAO.getProdutos();
         ArrayList<String[]> listaProdutos = new ArrayList<>();
-        
-        for(int i=0;i<produtos.size();i++)
-        {
-        	listaProdutos.add(new String[]{String.valueOf(produtos.get(i).getCodProduto()),produtos.get(i).getNome(),
-                produtos.get(i).getFornecedor(),String.valueOf(produtos.get(i).getQntEstoque()), 
-                String.valueOf(produtos.get(i).getQntCaixa()),String.valueOf(produtos.get(i).getPeso()),
-                String.valueOf(produtos.get(i).getPreco()),produtos.get(i).getCategoria()});
-        
+
+        for (int i = 0; i < produtos.size(); i++) {
+            listaProdutos.add(new String[]{
+                produtos.get(i).getNome(),
+                produtos.get(i).getDescricao(),
+                String.valueOf(produtos.get(i).getPrecoCompra()),
+                String.valueOf(produtos.get(i).getPrecoVenda()),
+                String.valueOf(produtos.get(i).getQuantidade()),
+                String.valueOf(produtos.get(i).isStatus())
+            });
+
         }
-        
+
         return listaProdutos;
-        
     }
-    
+
 }
