@@ -428,8 +428,23 @@ public class CadastrarProdutos extends javax.swing.JFrame {
     }//GEN-LAST:event_IncluirActionPerformed
 
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
+        ProductController Product = new ProductController();
         if (validadorDeCampos()) {
 
+            boolean valid, status = true;
+
+            if (Desabilitado.isSelected()) {
+                status = false;
+            }
+
+            valid = Product.salvar(NomeTexto.getText(), DescricaoTexto.getText(), Double.parseDouble(PrecoCompraTexto.getText().replace(",", ".")), Double.parseDouble(PrecoVendaTexto.getText().replace(",", ".")), Integer.parseInt(QuantidadeTexto.getText()), status);
+
+            if (valid) {
+                JOptionPane.showMessageDialog(null, "Produto salvo com sucesso!");
+                limparCamposDados();
+            } else {
+                JOptionPane.showMessageDialog(null, "Falha ao salvar os dados!");
+            }
         }
     }//GEN-LAST:event_salvarActionPerformed
 
