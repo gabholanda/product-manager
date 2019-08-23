@@ -105,7 +105,6 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         }
         return true;
     }
-
     public void LoadTable() throws SQLException {
 
         //Peço ao controller resgatar os produtos  do banco de dados
@@ -129,7 +128,6 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         tblProduto.getColumnModel().getColumn(3).setPreferredWidth(300); // PrecoCompra
         tblProduto.getColumnModel().getColumn(3).setPreferredWidth(300); // PrecoVenda
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -464,7 +462,6 @@ public class CadastrarProdutos extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Falha ao salvar os dados!");
             }
-
         }
     }//GEN-LAST:event_salvarActionPerformed
 
@@ -523,6 +520,11 @@ public class CadastrarProdutos extends javax.swing.JFrame {
 
 // TODO add your handling code here:
     }//GEN-LAST:event_ExcluirActionPerformed
+
+    private void ListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarActionPerformed
+        salvar.setText("Consultar");
+        habilitadorDosCampos();
+    }//GEN-LAST:event_ListarActionPerformed
 
     /**
      * @param args the command line arguments
