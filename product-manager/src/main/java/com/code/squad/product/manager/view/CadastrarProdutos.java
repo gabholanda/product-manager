@@ -470,10 +470,7 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         desabilitadorDosCampos();
         limparCamposDados();
     }//GEN-LAST:event_cancelarActionPerformed
-0
-    private void ListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ListarActionPerformed
+    
     private void AtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AtualizarActionPerformed
         //Verifico se há linhas para poder editar
         if (tblProduto.getRowCount() > 0) {
