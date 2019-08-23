@@ -10,6 +10,7 @@ package com.code.squad.product.manager.model;
  * @author gabriel
  */
 public class Product {
+    private int id;
     private String nome;
     private String descricao;
     private double precoCompra;
@@ -17,7 +18,11 @@ public class Product {
     private int quantidade;
     private boolean status;
 
-    public Product(String nome, String descricao, double precoCompra, double precoVenda, int quantidade, boolean status) {
+    
+    public Product() {}
+    
+    public Product(int id, String nome, String descricao, double precoCompra, double precoVenda, int quantidade, boolean status) {
+        this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.precoCompra = precoCompra;
@@ -73,6 +78,14 @@ public class Product {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
-    
+
 }

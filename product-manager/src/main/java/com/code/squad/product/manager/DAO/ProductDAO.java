@@ -5,11 +5,13 @@
  */
 package com.code.squad.product.manager.DAO;
 
+import com.code.squad.product.manager.model.Product;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -26,7 +28,7 @@ public class ProductDAO {
     private static Connection ConexaoProduto;
 
     //funcao para salvar dados no bd 
-    public static boolean salvarDados() {
+    public static boolean salvarDados(Product p) {
 
         boolean retorno = false;
 
@@ -35,16 +37,16 @@ public class ProductDAO {
             Class.forName(DRIVER);
             ConexaoProduto = DriverManager.getConnection(URL, LOGIN, SENHA);
 
-            PreparedStatement pst = ConexaoProduto.prepareStatement("INSERT INTO PRODUTOBD.PRODUTO (NOME, DESCRICAO, PRECO_COMPRA, PRECO_VENDA, QUANTIDADE, DISPONIVEL) VALUES(?, ?, ?, ?, ?, ?)");
+            PreparedStatement comando = ConexaoProduto.prepareStatement("INSERT INTO PRODUTOBD.PRODUTO (NOME, DESCRICAO, PRECO_COMPRA, PRECO_VENDA, QUANTIDADE, DISPONIVEL) VALUES(?, ?, ?, ?, ?, ?)");
 
-            pst.setString(1, ());
-            pst.setString(2, ());
-            pst.setDouble(3, ());
-            pst.setDouble(4, ());
-            pst.setInt(5, ());
-            pst.setBoolean(6, ());
+            comando.setString(1, (p.getNome()));
+            comando.setString(2, (p.getDescricao()));
+            comando.setDouble(3, (p.getPrecoCompra()));
+            comando.setDouble(4, (p.getPrecoVenda()));
+            comando.setInt(5, (p.getQuantidade()));
+            comando.setBoolean(6, (p.isStatus()));
 
-            int linhasAfetadas = pst.executeUpdate();
+            int linhasAfetadas = comando.executeUpdate();
 
             if (linhasAfetadas > 0) {
                 retorno = true;
@@ -107,7 +109,7 @@ public class ProductDAO {
     }
 
     //funcao para atualizar de dados no bd 
-    public static boolean atualizar() {
+    public static boolean atualizar(Product p) {
         boolean retorno = false;
 
         try {
@@ -117,12 +119,12 @@ public class ProductDAO {
 
             PreparedStatement comando = ConexaoProduto.prepareStatement("UPDATE PRODUTOBD.PRODUTO SET NOME=?, DESCRICAO=?, PRECO_COMPRA=?, PRECO_VENDA=?, QUANTIDADE=?, DISPONIVEL=? WHERE ID= ?");
 
-            pst.setString(1, ());
-            pst.setString(2, ());
-            pst.setString(3, ());
-            pst.setInt(4, ());
-            pst.setString(5, ());
-            pst.setDouble(6, ());
+            comando.setString(1, (p.getNome()));
+            comando.setString(2, (p.getDescricao()));
+            comando.setDouble(3, (p.getPrecoCompra()));
+            comando.setDouble(4, (p.getPrecoVenda()));
+            comando.setInt(5, (p.getQuantidade()));
+            comando.setBoolean(6, (p.isStatus()));
 
             int linhasAfetadas = comando.executeUpdate();
 
@@ -149,30 +151,34 @@ public class ProductDAO {
 
     }
 
-    public static ArrayList<> () {
-        ArrayList<>  = new ArrayList<>();
+    public static ArrayList<Product> getProdutos() {
+        ArrayList<Product> listaProdutos = new ArrayList<Product>();
 
         try {
 //Carrego o driver para acesso ao banco
-            Class.forName(DRIVER);            
-             //Monto a URL
+            Class.forName(DRIVER);
+            //Monto a URL
             ConexaoProduto = DriverManager.getConnection(URL, LOGIN, SENHA);
-            PreparedStatement pst = ConexaoProduto.prepareStatement();
-            ResultSet rs = pst.executeQuery("SELECT * FROM PRODUTOBD.PRODUTO;");
-            
-             if (rs != null) {
-            while (rs.next()) {
-                Produto prod = new Produto(); 
-                 //set dos dados 
-                 
-                 listaProduto.add(c);
-            } 
-           
-             } else {
+            Statement comando = ConexaoProduto.createStatement();
+            ResultSet rs = comando.executeQuery("SELECT * FROM PRODUTOBD.PRODUTO;");
+
+            if (rs != null) {
+                while (rs.next()) {
+                    Product prod = new Product();
+                    //set dos dados 
+                    prod.setId(rs.getInt("ID"));
+                    prod.setNome(rs.getString("NOME"));
+                    prod.setQuantidade(rs.getInt("QUANTIDADE"));
+                    prod.setPrecoCompra(rs.getDouble("PRECO_VENDA"));
+                    prod.setPrecoVenda(rs.getDouble("PRECO_COMPRA"));
+                    listaProdutos.add(prod);
+                }
+
+            } else {
                 throw new SQLException();
             }
 
-         } catch (SQLException e) {
+        } catch (SQLException e) {
             listaProdutos = null;
         } catch (ClassNotFoundException ex) {
             listaProdutos = null;

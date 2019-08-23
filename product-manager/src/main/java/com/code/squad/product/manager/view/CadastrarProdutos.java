@@ -180,10 +180,12 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         PrecoVenda.setText("Preço de Venda: ");
 
         Habilitado.setBackground(new java.awt.Color(255, 255, 255));
+        ESCOLHAS.add(Habilitado);
         Habilitado.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
         Habilitado.setText("HABILITADO");
 
         Desabilitado.setBackground(new java.awt.Color(255, 255, 255));
+        ESCOLHAS.add(Desabilitado);
         Desabilitado.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
         Desabilitado.setText("DESABILITADO");
 
@@ -295,6 +297,11 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         cancelar.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
         cancelar.setText("CANCELAR");
         cancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -356,7 +363,7 @@ public class CadastrarProdutos extends javax.swing.JFrame {
                 .addComponent(PainelCentral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(ProductPainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Atualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                    .addComponent(Atualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Incluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Listar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Excluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -398,6 +405,10 @@ public class CadastrarProdutos extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_salvarActionPerformed
+
+    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
+        desabilitadorDosCampos();
+    }//GEN-LAST:event_cancelarActionPerformed
 
     /**
      * @param args the command line arguments
