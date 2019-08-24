@@ -16,13 +16,13 @@ import java.util.ArrayList;
  */
 public class ProductController {
 
-    public static boolean salvar(String nome, String descricao, double precoCompra, double precoVenda, int quantidade, boolean status) {
-        Product p = new Product(nome, descricao, precoCompra, precoVenda, quantidade, status);
+    public static boolean salvar(String nome, String descricao, double precoCompra, double precoVenda, int quantidade, boolean status, String date) {
+        Product p = new Product(nome, descricao, precoCompra, precoVenda, quantidade, status, date);
         return ProductDAO.salvarDados(p);
     }
     
-    public static boolean atualizar(String nome, String descricao, double precoCompra, double precoVenda, int quantidade, boolean status) {
-        Product p = new Product(nome, descricao, precoCompra, precoVenda, quantidade, status);
+    public static boolean atualizar(String nome, String descricao, double precoCompra, double precoVenda, int quantidade, boolean status, String date) {
+        Product p = new Product(nome, descricao, precoCompra, precoVenda, quantidade, status, date);
         return ProductDAO.atualizar(p);
     }
     
@@ -36,12 +36,13 @@ public class ProductController {
 
         for (int i = 0; i < produtos.size(); i++) {
             listaProdutos.add(new String[]{
+                
+                String.valueOf(produtos.get(i).getId()),
                 produtos.get(i).getNome(),
                 produtos.get(i).getDescricao(),
                 String.valueOf(produtos.get(i).getPrecoCompra()),
                 String.valueOf(produtos.get(i).getPrecoVenda()),
-                String.valueOf(produtos.get(i).getQuantidade()),
-                String.valueOf(produtos.get(i).isStatus())
+                String.valueOf(produtos.get(i).getQuantidade())
             });
 
         }

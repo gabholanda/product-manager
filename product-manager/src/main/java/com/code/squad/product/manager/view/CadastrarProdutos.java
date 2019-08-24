@@ -8,7 +8,11 @@ package com.code.squad.product.manager.view;
 import javax.swing.JOptionPane;
 import com.code.squad.product.manager.controller.ProductController;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -62,6 +66,7 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         salvar.setEnabled(false);
         cancelar.setEnabled(false);
         Voltar.setEnabled(true);
+        Listar.setEnabled(true);
     }
 
     //limpa os campos preenchidos para realizar um novo cadastro de produto 
@@ -105,6 +110,7 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         }
         return true;
     }
+
     public void LoadTable() throws SQLException {
 
         //Peço ao controller resgatar os produtos  do banco de dados
@@ -124,10 +130,11 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         tblProduto.getColumnModel().getColumn(1).setPreferredWidth(250); // Data
         tblProduto.getColumnModel().getColumn(2).setPreferredWidth(200); // Nome
         tblProduto.getColumnModel().getColumn(3).setPreferredWidth(300); // Descricao
-        tblProduto.getColumnModel().getColumn(3).setPreferredWidth(300); // Quantidade
-        tblProduto.getColumnModel().getColumn(3).setPreferredWidth(300); // PrecoCompra
-        tblProduto.getColumnModel().getColumn(3).setPreferredWidth(300); // PrecoVenda
+        tblProduto.getColumnModel().getColumn(4).setPreferredWidth(300); // Quantidade
+        tblProduto.getColumnModel().getColumn(5).setPreferredWidth(300); // PrecoCompra
+        tblProduto.getColumnModel().getColumn(6).setPreferredWidth(300); // PrecoVenda
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -349,12 +356,20 @@ public class CadastrarProdutos extends javax.swing.JFrame {
 
         tblProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null, null}
             },
             new String [] {
-
+                "Título 1", "Título 2", "Título 3", "Título 4", "Título 5", "Título 6"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         TabelaDeDados.setViewportView(tblProduto);
 
         Voltar.setText("VOLTAR");
@@ -453,8 +468,15 @@ public class CadastrarProdutos extends javax.swing.JFrame {
             if (Desabilitado.isSelected()) {
                 status = false;
             }
+            Date date = new Date();
+            Timestamp timesNow = new Timestamp(date.getTime());
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String dataFormatada = dateFormat.format(timesNow);
 
-            valid = Product.salvar(NomeTexto.getText(), DescricaoTexto.getText(), Double.parseDouble(PrecoCompraTexto.getText().replace(",", ".")), Double.parseDouble(PrecoVendaTexto.getText().replace(",", ".")), Integer.parseInt(QuantidadeTexto.getText()), status);
+            valid = Product.salvar(NomeTexto.getText(), DescricaoTexto.getText(),
+                    Double.parseDouble(PrecoCompraTexto.getText().replace(",", ".")),
+                    Double.parseDouble(PrecoVendaTexto.getText().replace(",", ".")),
+                    Integer.parseInt(QuantidadeTexto.getText()), status, dataFormatada);
 
             if (valid) {
                 JOptionPane.showMessageDialog(null, "Produto salvo com sucesso!");
@@ -470,7 +492,7 @@ public class CadastrarProdutos extends javax.swing.JFrame {
         desabilitadorDosCampos();
         limparCamposDados();
     }//GEN-LAST:event_cancelarActionPerformed
-    
+
     private void AtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AtualizarActionPerformed
         //Verifico se há linhas para poder editar
         if (tblProduto.getRowCount() > 0) {
@@ -519,8 +541,11 @@ public class CadastrarProdutos extends javax.swing.JFrame {
     }//GEN-LAST:event_ExcluirActionPerformed
 
     private void ListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarActionPerformed
-        salvar.setText("Consultar");
-        habilitadorDosCampos();
+        try {
+            LoadTable();
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastrarProdutos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ListarActionPerformed
 
     /**

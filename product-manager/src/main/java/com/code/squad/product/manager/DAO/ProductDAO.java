@@ -38,7 +38,7 @@ public class ProductDAO {
             Class.forName(DRIVER);
             ConexaoProduto = DriverManager.getConnection(URL, LOGIN, SENHA);
 
-            PreparedStatement comando = ConexaoProduto.prepareStatement("INSERT INTO PRODUTOBD.PRODUTO (NOME, DESCRICAO, PRECO_COMPRA, PRECO_VENDA, QUANTIDADE, DISPONIVEL) VALUES(?, ?, ?, ?, ?, ?)");
+            PreparedStatement comando = ConexaoProduto.prepareStatement("INSERT INTO PRODUTOBD.PRODUTO (NOME, DESCRICAO, PRECO_COMPRA, PRECO_VENDA, QUANTIDADE, DISPONIVEL, DT_CADASTRO) VALUES(?, ?, ?, ?, ?, ?, ? )");
 
             comando.setString(1, (p.getNome()));
             comando.setString(2, (p.getDescricao()));
@@ -46,6 +46,7 @@ public class ProductDAO {
             comando.setDouble(4, (p.getPrecoVenda()));
             comando.setInt(5, (p.getQuantidade()));
             comando.setBoolean(6, (p.isStatus()));
+            comando.setString(7, (p.getDate()));
 
             int linhasAfetadas = comando.executeUpdate();
 
@@ -58,6 +59,7 @@ public class ProductDAO {
         } catch (ClassNotFoundException ex) {
             retorno = false;
         } catch (SQLException ex) {
+            System.out.println(ex);
             retorno = false;
         } finally {
             try {
@@ -168,6 +170,7 @@ public class ProductDAO {
                     Product prod = new Product();
                     //set dos dados 
                     prod.setId(rs.getInt("ID"));
+                    prod.setDescricao(rs.getString("DESCRICAO"));
                     prod.setNome(rs.getString("NOME"));
                     prod.setQuantidade(rs.getInt("QUANTIDADE"));
                     prod.setPrecoCompra(rs.getDouble("PRECO_VENDA"));
